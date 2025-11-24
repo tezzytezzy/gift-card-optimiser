@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Card Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Gift Card Optimiser</h1>
+            <p class="subtitle">Minimise waste, maximise savings. (v1.1)</p>
+        </header>
+
+        <main>
+            <!-- Section 1: Gift Cards -->
+            <section id="gift-cards-section" class="card-section">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-credit-card"></i> Gift Cards</h2>
+                    <p class="helper-text">Add the cards you can buy.</p>
+                </div>
+
+                <div id="gift-cards-list" class="input-list">
+                    <!-- Gift Card Rows will be injected here -->
+                </div>
+
+                <button id="add-card-btn" class="btn btn-outline">
+                    <i class="fa-solid fa-plus"></i> Add Card
+                </button>
+            </section>
+
+            <!-- Section 2: Items -->
+            <section id="items-section" class="card-section">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-cart-shopping"></i> Items</h2>
+                    <p class="helper-text">Add items you want to purchase.</p>
+                </div>
+
+                <div id="items-list" class="items-grid">
+                    <!-- Item Cards will be injected here -->
+                </div>
+
+                <button id="add-item-btn" class="btn btn-outline">
+                    <i class="fa-solid fa-plus"></i> Add Item
+                </button>
+
+                <div class="action-bar">
+                    <button id="calculate-btn" class="btn btn-primary btn-lg">
+                        Show me deals <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Section 3: Results -->
+            <section id="results-section" class="results-section hidden">
+                <div class="section-header">
+                    <h2>Optimisation Results</h2>
+                </div>
+
+                <div class="summary-cards">
+                    <div id="card-topup" class="summary-card best-topup">
+                        <div class="card-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
+                        <div class="card-content">
+                            <h3>Best Cash Topup</h3>
+                            <div class="value" id="best-topup-value">$0.00</div>
+                            <p class="desc">Minimal cash needed</p>
+                        </div>
+                    </div>
+
+                    <div id="card-loss" class="summary-card best-loss">
+                        <div class="card-icon"><i class="fa-solid fa-piggy-bank"></i></div>
+                        <div class="card-content">
+                            <h3>Best Card Loss</h3>
+                            <div class="value" id="best-loss-value">$0.00</div>
+                            <p class="desc">Minimal wasted value</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="detailed-results" class="detailed-results">
+                    <!-- Detailed breakdown will go here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Templates -->
+    <template id="template-gift-card">
+        <div class="gift-card-row">
+            <div class="input-group">
+                <label>Value ($)</label>
+                <input type="number" class="card-value" placeholder="50" min="0">
+            </div>
+            <div class="input-group">
+                <label>Qty</label>
+                <input type="number" class="card-qty" placeholder="∞" min="0">
+            </div>
+            <button class="btn-icon delete-card"><i class="fa-solid fa-trash"></i></button>
+        </div>
+    </template>
+
+    <template id="template-item-card">
+        <div class="item-card">
+            <div class="item-row-top">
+                <div class="input-group item-name-group">
+                    <label>Item Name</label>
+                    <input type="text" class="item-name" placeholder="e.g. Headphones">
+                </div>
+                <button class="btn-icon delete-item"><i class="fa-solid fa-trash"></i></button>
+            </div>
+            <div class="item-row-bottom">
+                <div class="input-group item-price-group">
+                    <label>Price ($)</label>
+                    <input type="number" class="item-price" placeholder="0.00" min="0" step="0.01">
+                </div>
+                <div class="stepper-group">
+                    <label>Min Qty</label>
+                    <div class="stepper">
+                        <button class="stepper-btn minus"><i class="fa-solid fa-minus"></i></button>
+                        <input type="number" class="item-min-qty" value="1" min="0" readonly>
+                        <button class="stepper-btn plus"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+                <div class="stepper-group">
+                    <label>Max Qty</label>
+                    <div class="stepper">
+                        <button class="stepper-btn minus"><i class="fa-solid fa-minus"></i></button>
+                        <input type="number" class="item-max-qty" value="1" min="0" readonly>
+                        <button class="stepper-btn plus"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
