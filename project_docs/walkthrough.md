@@ -1,38 +1,56 @@
-# Walkthrough - Gift Card Calculator
+# Walkthrough - UI/UX Improvements
 
-I have successfully built the Gift Card Calculator with a mobile-first design and optimization logic.
+I have implemented the requested UI/UX improvements to enhance the usability and "premium" feel of the application.
 
-## Features Implemented
-1.  **Mobile-First UI**: Single column layout with large touch targets.
-2.  **Gift Card Management**: Add multiple cards with Value and Quantity.
-3.  **Item Management**:
-    *   Card-based layout.
-    *   **Stepper Controls** for Min/Max Quantity.
-    *   Add/Delete functionality.
-4.  **Optimisation Logic**:
-    *   Calculates **Best Cash Topup** (minimising cash out-of-pocket).
-    *   Calculates **Best Card Loss** (minimising wasted card value).
-    *   Handles multiple items and quantities.
-5.  **Interactive Results**:
-    *   Click on result cards to toggle detailed breakdown.
-    *   Shows specific items purchased and gift cards used for each strategy.
+## Changes
+
+### 1. Gift Card Quantity Selector
+*   **Change**: Replaced the standard number input with a custom **Stepper Component** for Gift Card quantities.
+*   **Benefit**: Provides a consistent user experience across both Gift Cards and Items, matching the "Premium" aesthetic.
+*   **Implementation**:
+    *   Updated `index.html` to use the stepper structure.
+    *   Updated `script.js` to initialize stepper logic for Gift Cards.
+
+### 2. Input Validation & Error Handling
+*   **Change**: Implemented custom validation logic that highlights invalid fields and guides the user.
+*   **Benefit**: clearer error feedback and better accessibility.
+*   **Implementation**:
+    *   **Visuals**: Added `.input-error` class in `style.css` with a red border and a subtle "shake" animation.
+    *   **Logic**: Updated `calculateResults` in `script.js` to:
+        *   Validate all inputs (Gift Card Values, Item Names, Prices, Min/Max Qty).
+        *   Apply the error class to invalid fields.
+        *   Show a single alert message ("Please check the highlighted fields").
+        *   **Auto-focus**: Automatically scroll to and focus the first invalid element.
 
 ## Verification Results
 
-### Scenario 1: Single Item ($45) vs $50 Card
-*   **Input**: Item $45. Card $50.
-*   **Result**:
-    *   **Best Cash Topup**: $45.00 (Pay cash, save card).
-    *   **Best Card Loss**: $5.00 (Use card, lose $5 value).
+### Manual Verification
+*   **Gift Card Stepper**:
+    *   [x] Verified that `+` and `-` buttons correctly increment/decrement the quantity.
+    *   [x] Verified that the value defaults to 1.
+    *   [x] Verified that the input is read-only to prevent invalid characters.
+*   **Validation**:
+    *   [x] Verified that clicking "Show me deals" with empty Item Name triggers error style and focus.
+    *   [x] Verified that clicking "Show me deals" with invalid Price triggers error style and focus.
+    *   [x] Verified that clicking "Show me deals" with Min Qty > Max Qty triggers error style on both steppers.
+    *   [x] Verified that the "Shake" animation plays when an error occurs.
 
-### Scenario 2: Multiple Items ($105) vs 2x $50 Cards
-*   **Input**: Items $45 + $60 = $105. Cards 2x $50 = $100.
-*   **Result**:
-    *   **Best Cash Topup**: $5.00 (Use both cards, pay $5 diff).
-    *   **Best Card Loss**: $0.00 (Fully utilised cards).
+### 3. Copyright Footer
+*   **Change**: Added a sleek, minimalist copyright footer (Option A) to the bottom of the page.
+*   **Implementation**: Added `<footer>` to `index.html` and `.app-footer` styles to `style.css`.
+*   **Verification**:
+    *   [x] Verified that the footer appears at the bottom of the page.
+    *   [x] Verified that the footer appears at the bottom of the page.
+    *   [x] Verified that the text matches "© 2025 East Oaret 3621 Inc.".
 
-## Visuals
-The application is live at `index.html`.
+### 4. Favicon
+*   **Change**: Added a custom favicon (Option 2 - "Optimized G").
+*   **Implementation**: Added `favicon.png` to root and linked it in `index.html`.
+*   **Verification**:
+    *   [x] Verified `favicon.png` exists in the project root.
+    *   [x] Verified `<link rel="icon" ...>` tag is present in `index.html`.
 
-### Interactive Results Test (v1.1)
-![Interactive Results](/home/tezza/.gemini/antigravity/brain/ed4ed5f5-5243-4c7a-a573-e3b53b85fd30/verify_ids_sed_fix_1763957826580.webp)
+### 5. Branding Update
+*   **Change**: Updated page title to "Gift Card Optimiser" to match the header and localization.
+*   **Verification**:
+    *   [x] Verified `<title>` tag matches `<h1>`.

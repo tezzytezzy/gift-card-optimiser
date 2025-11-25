@@ -16,3 +16,9 @@
     - [x] Interactive Result Cards <!-- id: 13 -->
     - [x] Detailed Breakdown Logic <!-- id: 14 -->
 - [x] GitHub Setup <!-- id: 15 -->
+- [x] UI/UX Improvements <!-- id: 16 -->
+    - [x] Gift Card Quantity Selector Update <!-- id: 17 -->
+    - [x] Input Validation & Error Handling <!-- id: 18 -->
+    - [x] Input Validation & Error Handling <!-- id: 18 -->
+    - [x] Add Copyright Footer <!-- id: 19 -->
+    - [x] Design Favicon <!-- id: 20 -->

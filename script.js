@@ -59,6 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
             row.remove();
         });
 
+        // Stepper Logic
+        setupStepper(row.querySelector('.card-qty').parentElement.parentElement);
+
         giftCardsList.appendChild(row);
     }
 
@@ -79,9 +82,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function setupStepper(stepperElement) {
-        const input = stepperElement.querySelector('input');
-        const minusBtn = stepperElement.querySelector('.minus');
-        const plusBtn = stepperElement.querySelector('.plus');
+        // Handle both structure types (div.stepper or div.stepper-group > div.stepper)
+        const stepper = stepperElement.classList.contains('stepper') ? stepperElement : stepperElement.querySelector('.stepper');
+        if (!stepper) return;
+
+        const input = stepper.querySelector('input');
+        const minusBtn = stepper.querySelector('.minus');
+        const plusBtn = stepper.querySelector('.plus');
 
         minusBtn.addEventListener('click', () => {
             let val = parseInt(input.value) || 0;
@@ -95,30 +102,92 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function calculateResults() {
+        // Clear previous errors
+        document.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+
+        let hasError = false;
+        let firstErrorEl = null;
+
         // 1. Parse Inputs
         const cards = [];
         document.querySelectorAll('.gift-card-row').forEach(row => {
-            const val = parseFloat(row.querySelector('.card-value').value);
-            const qty = parseInt(row.querySelector('.card-qty').value);
-            if (!isNaN(val) && !isNaN(qty) && qty > 0) {
+            const valInput = row.querySelector('.card-value');
+            const qtyInput = row.querySelector('.card-qty');
+
+            const val = parseFloat(valInput.value);
+            const qty = parseInt(qtyInput.value);
+
+            let rowError = false;
+
+            if (isNaN(val) || val <= 0) {
+                valInput.classList.add('input-error');
+                rowError = true;
+                if (!firstErrorEl) firstErrorEl = valInput;
+            }
+            // Qty is readonly/stepper, usually safe, but check anyway
+            if (isNaN(qty) || qty < 0) {
+                // Note: qty 0 is technically allowed if they just don't want to use that card? 
+                // But usually we want > 0 for active cards. 
+                // However, the original logic filtered out qty > 0. 
+                // Let's just validate value for now as critical.
+            }
+
+            if (!rowError && !isNaN(val) && !isNaN(qty) && qty > 0) {
                 cards.push({ value: val, qty: qty });
+            } else if (rowError) {
+                hasError = true;
             }
         });
 
         const items = [];
         document.querySelectorAll('.item-card').forEach(card => {
-            const name = card.querySelector('.item-name').value || 'Item';
-            const price = parseFloat(card.querySelector('.item-price').value);
-            const minQty = parseInt(card.querySelector('.item-min-qty').value);
-            const maxQty = parseInt(card.querySelector('.item-max-qty').value);
+            const nameInput = card.querySelector('.item-name');
+            const priceInput = card.querySelector('.item-price');
+            const minQtyInput = card.querySelector('.item-min-qty');
+            const maxQtyInput = card.querySelector('.item-max-qty');
 
-            if (!isNaN(price) && !isNaN(minQty) && !isNaN(maxQty)) {
+            const name = nameInput.value.trim();
+            const price = parseFloat(priceInput.value);
+            const minQty = parseInt(minQtyInput.value);
+            const maxQty = parseInt(maxQtyInput.value);
+
+            let cardError = false;
+
+            if (!name) {
+                nameInput.classList.add('input-error');
+                cardError = true;
+                if (!firstErrorEl) firstErrorEl = nameInput;
+            }
+            if (isNaN(price) || price <= 0) {
+                priceInput.classList.add('input-error');
+                cardError = true;
+                if (!firstErrorEl) firstErrorEl = priceInput;
+            }
+            if (minQty > maxQty) {
+                minQtyInput.parentElement.classList.add('input-error');
+                maxQtyInput.parentElement.classList.add('input-error');
+                cardError = true;
+                if (!firstErrorEl) firstErrorEl = minQtyInput;
+            }
+
+            if (cardError) {
+                hasError = true;
+            } else {
                 items.push({ name, price, minQty, maxQty });
             }
         });
 
+        if (hasError) {
+            alert("Please check the highlighted fields.");
+            if (firstErrorEl) {
+                firstErrorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                firstErrorEl.focus();
+            }
+            return;
+        }
+
         if (items.length === 0) {
-            alert("Please add at least one item.");
+            alert("Please add at least one valid item.");
             return;
         }
 

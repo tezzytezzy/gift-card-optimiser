@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gift Card Calculator</title>
+    <title>Gift Card Optimiser</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -89,6 +90,10 @@
                 </div>
             </section>
         </main>
+
+        <footer class="app-footer">
+            <p>&copy; 2025 East Oaret 3621 Inc.</p>
+        </footer>
     </div>
 
     <!-- Templates -->
@@ -98,9 +103,13 @@
                 <label>Value ($)</label>
                 <input type="number" class="card-value" placeholder="50" min="0">
             </div>
-            <div class="input-group">
+            <div class="stepper-group">
                 <label>Qty</label>
-                <input type="number" class="card-qty" placeholder="∞" min="0">
+                <div class="stepper">
+                    <button class="stepper-btn minus"><i class="fa-solid fa-minus"></i></button>
+                    <input type="number" class="card-qty" value="1" min="0" readonly>
+                    <button class="stepper-btn plus"><i class="fa-solid fa-plus"></i></button>
+                </div>
             </div>
             <button class="btn-icon delete-card"><i class="fa-solid fa-trash"></i></button>
         </div>

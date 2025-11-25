@@ -1,20 +1,29 @@
-# Design Options
+# Copyright Footer Options
 
-Here are two wireframe concepts for your Gift Card Calculator.
+Here are two sleek and minimalist options for the footer.
 
-## Option 1: Split View Dashboard
-**Best for:** Desktop users, power users who want to tweak inputs and see results instantly.
-**Layout:**
-- **Left Panel:** Input forms for Gift Cards and Items.
-- **Right Panel:** Real-time optimization results and savings summary.
+## Option A: The "Essential"
+Simple, centered, and subtle.
 
-![Split View](/home/tezza/.gemini/antigravity/brain/ed4ed5f5-5243-4c7a-a573-e3b53b85fd30/wireframe_split_view_1763953986310.png)
+**Preview:**
+> © 2025 East Oaret 3621 Inc.
 
-## Option 2: Single Column / Mobile Focused
-**Best for:** Mobile users, simple linear workflows.
-**Layout:**
-- **Top:** Summary / Header.
-- **Middle:** Collapsible sections for inputs.
-- **Bottom:** Prominent Calculate button and results below.
+**Code:**
+```html
+<footer style="text-align: center; margin-top: 40px; padding: 20px; color: #6b7280; font-size: 0.75rem;">
+    <p>&copy; 2025 East Oaret 3621 Inc.</p>
+</footer>
+```
 
-![Single Column](/home/tezza/.gemini/antigravity/brain/ed4ed5f5-5243-4c7a-a573-e3b53b85fd30/wireframe_single_column_1763954005982.png)
+## Option B: The "Modern Mono"
+Uppercase, tracked, and very clean.
+
+**Preview:**
+> EAST OARET 3621 INC. © 2025
+
+**Code:**
+```html
+<footer style="text-align: center; margin-top: 40px; padding: 20px; color: #9ca3af; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;">
+    <p>East Oaret 3621 Inc. &copy; 2025</p>
+</footer>
+```

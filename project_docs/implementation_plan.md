@@ -40,9 +40,20 @@ Build a mobile-first static web application that calculates the optimal combinat
     -   Stepper logic (+/-).
 -   **Calculation Logic**:
     -   `calculateOptimalCombination()`:
-        1.  Determine total cost range (Min Total to Max Total).
-        2.  Find combination of gift cards that covers the cost with minimal remainder (Card Loss) or minimal extra cash needed (Cash Topup).
+        1.  **Validation**: Check inputs. If invalid, apply `.input-error` class, show alert, and focus first invalid element.
+        2.  Determine total cost range (Min Total to Max Total).
+        3.  Find combination of gift cards that covers the cost with minimal remainder (Card Loss) or minimal extra cash needed (Cash Topup).
     -   Display results dynamically.
+
+### [MODIFY] [index.html](file:///home/tezza/.gemini/antigravity/playground/frozen-juno/index.html)
+-   **Gift Card Template**: Replace simple quantity input with `stepper` component (same as Items).
+
+### [MODIFY] [style.css](file:///home/tezza/.gemini/antigravity/playground/frozen-juno/style.css)
+-   **Validation Styles**: Add `.input-error` class (red border, shake animation).
+
+### [MODIFY] [script.js](file:///home/tezza/.gemini/antigravity/playground/frozen-juno/script.js)
+-   **Gift Card Logic**: Add stepper event listeners to Gift Card rows.
+-   **Validation**: Implement custom validation logic in `calculateResults`.
 
 ## Verification Plan
 
